@@ -9,9 +9,10 @@
     <meta name="mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="apple-mobile-web-app-title" content="DG60FX Amp">
-	<!-- Web App Manifest mit eingebettetem SVG-Icon für die Installation -->
-    <link rel="manifest" href="data:application/manifest+json;charset=utf-8,%7B%22name%22%3A%22Yamaha%20DG60FX%20Preset%20Library%22%2C%22short_name%22%3A%22DG60FX%20Amp%22%2C%22start_url%22%3A%22.%22%2C%22display%22%3A%22standalone%22%2C%22background_color%22%3A%22%230d0e10%22%2C%22theme_color%22%3A%22%23141416%22%2C%22icons%22%3A%5B%7B%22src%22%3A%22data%3Aimage%2Fsvg%2Bxml%3Butf8%2C%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20512%20512%22%3E%3Crect%20width%3D%22512%22%20height%3D%22512%22%20rx%3D%22112%22%20fill%3D%22%230d0e10%22%2F%3E%3Cpath%20d%3D%22M256%2096c-88.366%200-160%2071.634-160%20160s71.634%20160%20160%20160%20160-71.634%20160-160-71.634-160-160-160zm0%20272c-61.856%200-112-50.144-112-112s50.144-112%20112-112%20112%2050.144%20112%20112-50.144%20112-112%20112z%22%20fill%3D%22%23d97706%22%2F%3E%3Cpath%20d%3D%22M256%20192v64l48%2048%22%20stroke%3D%22%23fff8e7%22%20stroke-width%3D%2224%22%20stroke-linecap%3D%22round%22%20fill%3D%22none%22%2F%3E%3C%2Fsvg%3E%22%2C%22sizes%22%3A%22512x512%22%2C%22type%22%3A%22image%2Fsvg%2Bxml%22%2C%22purpose%22%3A%22any%20maskable%22%7D%5D%7D">
-    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'><rect width='512' height='512' rx='112' fill='%230d0e10'/><path d='M256 96c-88.366 0-160 71.634-160 160s71.634 160 160 160 160-71.634 160-160-71.634-160-160-160zm0 272c-61.856 0-112-50.144-112-112s50.144-112 112-112 112 50.144 112 112-50.144 112-112 112z' fill='%23d97706'/><path d='M256 192v64l48 48' stroke='%23fff8e7' stroke-width='24' stroke-linecap='round' fill='none'/></svg>">
+    <!-- Externes Web App Manifest & SVG-Icon für Android-Kompatibilität -->
+    <link rel="manifest" href="manifest.json">
+    <link rel="icon" type="image/svg+xml" href="icon.svg">
+    <link rel="apple-touch-icon" href="icon.svg">
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500;700&family=Inter:wght@400;600;800&display=swap');
@@ -67,31 +68,13 @@
             <!-- Header / Brand -->
             <div class="flex flex-col md:flex-row justify-between items-center mb-6 border-b border-neutral-800 pb-5 gap-4">
                 <div class="flex items-center gap-4">
-                    <!-- Red Power LED
-                    <div class="relative flex items-center justify-center">
-                        <div class="w-5 h-5 rounded-full bg-red-600 animate-pulse shadow-[0_0_15px_rgba(239,68,68,1)] border border-red-400"></div>
-                        <div class="absolute w-2 h-2 rounded-full bg-red-200"></div>
-                    </div>
-                    -->
                     <div>
-                        <!-- <div class="flex items-baseline gap-2">
-                            <h1 class="text-3xl font-extrabold tracking-wider text-amber-100 font-brand">YAMAHA</h1>
-                            <span class="text-xs font-bold tracking-widest text-amber-500 font-mono">DG60FX-112</span>
-                        </div>
-                        <p class="text-xs text-neutral-400 uppercase tracking-widest">Preset Library</p> -->
                         <div class="flex items-baseline gap-2">
                             <h1 class="text-3xl font-extrabold tracking-wider text-amber-100 font-brand">DG60FX-112</h1>
                             <span class="text-xs font-bold tracking-widest text-amber-500 font-mono">Preset Library</span>
                         </div>
                     </div>
                 </div>
-
-                <!-- Digital Status Display
-                <div class="flex items-center gap-2 bg-neutral-900 border border-neutral-800 px-4 py-2 rounded-lg shadow-inner">
-                    <span class="w-2 h-2 rounded-full bg-red-500 animate-ping"></span>
-                    <span class="text-xs font-mono text-red-400 uppercase tracking-widest">MOTOR POTIS ACTIVE</span>
-                </div>
-                 -->
             </div>
 
             <!-- Preset Management Bar -->
@@ -404,16 +387,12 @@
     </div>
 
 <script>
-    // PWA Service Worker
+    // PWA Service Worker (externe Datei für Android-Kompatibilität)
     if ('serviceWorker' in navigator) {
         window.addEventListener('load', () => {
-            const swCode = `
-                self.addEventListener('install', e => self.skipWaiting());
-                self.addEventListener('activate', e => self.clients.claim());
-                self.addEventListener('fetch', e => e.respondWith(fetch(e.request).catch(() => caches.match(e.request))));
-            `;
-            const blob = new Blob([swCode], { type: 'application/javascript' });
-            navigator.serviceWorker.register(URL.createObjectURL(blob)).catch(() => {});
+            navigator.serviceWorker.register('sw.js').catch((err) => {
+                console.warn('Service Worker Registrierung fehlgeschlagen:', err);
+            });
         });
     }
 
@@ -734,12 +713,10 @@
     });
 
     // FX Tab UI Elements Bindings
-    // 1. Compressor
     const fxCompEnable = document.getElementById('fxCompEnable');
     const fxComp = document.getElementById('fxComp');
     const fxCompVal = document.getElementById('fxCompVal');
 
-    // 2. Modulation
     const fxModEnable = document.getElementById('fxModEnable');
     const fxModType = document.getElementById('fxModType');
     const fxModSpeed = document.getElementById('fxModSpeed');
@@ -753,7 +730,6 @@
     const fxModParam4Val = document.getElementById('fxModParam4Val');
     const fxModParam4Label = document.getElementById('fxModParam4Label');
 
-    // Modulation Secondary Parameter Dynamic Titles
     const modParamsConfig = {
         "Chorus":  { p3: "Delay (Chorus + Speed)", p4: "Mix (Chorus + Depth)" },
         "Flanger": { p3: "Delay (Flanger + Speed)", p4: "Feedback Level (Flanger + Depth)" },
@@ -769,7 +745,6 @@
     }
     fxModType.addEventListener('change', updateModLabels);
 
-    // 3. Delay
     const fxDelayEnable = document.getElementById('fxDelayEnable');
     const fxDelayType = document.getElementById('fxDelayType');
     const fxDelayTime = document.getElementById('fxDelayTime');
@@ -779,17 +754,14 @@
     const fxDelayLevel = document.getElementById('fxDelayLevel');
     const fxDelayLevelVal = document.getElementById('fxDelayLevelVal');
 
-    // 4. Reverb
     const fxReverbEnable = document.getElementById('fxReverbEnable');
     const fxReverbType = document.getElementById('fxReverbType');
     const fxReverbLevel = document.getElementById('fxReverbLevel');
     const fxReverbLevelVal = document.getElementById('fxReverbLevelVal');
 
-    // 5. Speaker Simulator
     const spSimEnable = document.getElementById('spSimEnable');
     const spSimType = document.getElementById('spSimType');
 
-    // FX Sliders Label Updates
     fxComp.addEventListener('input', () => fxCompVal.textContent = parseFloat(fxComp.value).toFixed(1));
     
     fxModSpeed.addEventListener('input', () => fxModSpeedVal.textContent = parseFloat(fxModSpeed.value).toFixed(1));
@@ -868,27 +840,22 @@
     function getCurrentSettings() {
         const settings = {
             ampMode: ampModes[currentAmpIndex].name,
-            // 1. Compressor
             compEnable: fxCompEnable.checked,
             compVal: parseFloat(fxComp.value),
-            // 2. Modulation
             modEnable: fxModEnable.checked,
             modType: fxModType.value,
             modSpeed: parseFloat(fxModSpeed.value),
             modDepth: parseFloat(fxModDepth.value),
             modParam3: parseFloat(fxModParam3.value),
             modParam4: parseFloat(fxModParam4.value),
-            // 3. Delay
             delayEnable: fxDelayEnable.checked,
             delayType: fxDelayType.value,
             delayTime: parseFloat(fxDelayTime.value),
             delayFeedback: parseFloat(fxDelayFeedback.value),
             delayLevel: parseFloat(fxDelayLevel.value),
-            // 4. Reverb
             reverbEnable: fxReverbEnable.checked,
             reverbType: fxReverbType.value,
             reverbLevel: parseFloat(fxReverbLevel.value),
-            // 5. Speaker Sim
             spSimEnable: spSimEnable.checked,
             spSimType: spSimType.value
         };
@@ -908,12 +875,9 @@
             }
         });
 
-        // Apply FX & Cab Sim parameters
-        // 1. Compressor
         fxCompEnable.checked = !!settings.compEnable;
         if (settings.compVal !== undefined) { fxComp.value = settings.compVal; fxCompVal.textContent = parseFloat(settings.compVal).toFixed(1); }
 
-        // 2. Modulation
         fxModEnable.checked = !!settings.modEnable;
         if (settings.modType !== undefined) fxModType.value = settings.modType;
         updateModLabels();
@@ -922,19 +886,16 @@
         if (settings.modParam3 !== undefined) { fxModParam3.value = settings.modParam3; fxModParam3Val.textContent = parseFloat(settings.modParam3).toFixed(1); }
         if (settings.modParam4 !== undefined) { fxModParam4.value = settings.modParam4; fxModParam4Val.textContent = parseFloat(settings.modParam4).toFixed(1); }
 
-        // 3. Delay
         fxDelayEnable.checked = settings.delayEnable !== undefined ? !!settings.delayEnable : (settings.delayType !== 'Off');
         if (settings.delayType && settings.delayType !== 'Off') fxDelayType.value = settings.delayType;
         if (settings.delayTime !== undefined) { fxDelayTime.value = settings.delayTime; fxDelayTimeVal.textContent = parseFloat(settings.delayTime).toFixed(1); }
         if (settings.delayFeedback !== undefined) { fxDelayFeedback.value = settings.delayFeedback; fxDelayFeedbackVal.textContent = parseFloat(settings.delayFeedback).toFixed(1); }
         if (settings.delayLevel !== undefined) { fxDelayLevel.value = settings.delayLevel; fxDelayLevelVal.textContent = parseFloat(settings.delayLevel).toFixed(1); }
 
-        // 4. Reverb
         fxReverbEnable.checked = settings.reverbEnable !== undefined ? !!settings.reverbEnable : (settings.reverbType !== 'Off');
         if (settings.reverbType && settings.reverbType !== 'Off') fxReverbType.value = settings.reverbType;
         if (settings.reverbLevel !== undefined) { fxReverbLevel.value = settings.reverbLevel; fxReverbLevelVal.textContent = parseFloat(settings.reverbLevel).toFixed(1); }
 
-        // 5. Speaker Sim
         spSimEnable.checked = settings.spSimEnable !== undefined ? !!settings.spSimEnable : (settings.spSimType !== 'Off');
         if (settings.spSimType && settings.spSimType !== 'Off') spSimType.value = settings.spSimType;
     }

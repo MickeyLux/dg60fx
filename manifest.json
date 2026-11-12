@@ -1,0 +1,16 @@
+{
+  "name": "Yamaha DG60FX Preset Library",
+  "short_name": "DG60FX Amp",
+  "start_url": ".",
+  "display": "standalone",
+  "background_color": "#0d0e10",
+  "theme_color": "#141416",
+  "icons": [
+    {
+      "src": "icon.svg",
+      "sizes": "512x512",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}
