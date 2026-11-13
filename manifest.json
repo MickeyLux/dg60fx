@@ -3,6 +3,7 @@
   "short_name": "DG60FX Amp",
   "start_url": ".",
   "display": "standalone",
+  "display_override": ["window-controls-overlay"],
   "background_color": "#0d0e10",
   "theme_color": "#141416",
   "icons": [
