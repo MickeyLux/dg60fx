@@ -795,24 +795,30 @@ if (presetNameInput) {
     presetNameInput.addEventListener('keydown', (e) => {
         const items = presetDropdownMenu.querySelectorAll('.dropdown-item');
         
-        // Wenn Dropdown zu ist und Pfeiltaste gedrückt wird -> öffnen
+        // Wenn Dropdown zu ist und Pfeiltaste gedrückt wird -> öffnen und direkt erstes Element fokussieren
         if (presetDropdownMenu.classList.contains('hidden')) {
             if (e.key === 'ArrowDown' || e.key === 'ArrowUp') {
                 e.preventDefault();
                 renderPresetDropdown(presetNameInput.value);
                 presetDropdownMenu.classList.remove('hidden');
+                currentFocusIndex = items.length > 0 ? 0 : -1;
+                updateItemHighlight();
             }
             return;
         }
 
         if (e.key === 'ArrowDown') {
             e.preventDefault();
-            currentFocusIndex = (currentFocusIndex + 1) % items.length;
-            updateItemHighlight();
+            if (items.length > 0) {
+                currentFocusIndex = (currentFocusIndex + 1) % items.length;
+                updateItemHighlight();
+            }
         } else if (e.key === 'ArrowUp') {
             e.preventDefault();
-            currentFocusIndex = (currentFocusIndex - 1 + items.length) % items.length;
-            updateItemHighlight();
+            if (items.length > 0) {
+                currentFocusIndex = (currentFocusIndex - 1 + items.length) % items.length;
+                updateItemHighlight();
+            }
         } else if (e.key === 'Enter') {
             e.preventDefault();
             if (currentFocusIndex >= 0 && items[currentFocusIndex]) {
@@ -821,6 +827,7 @@ if (presetNameInput) {
                 loadSelectedPreset(); // Fallback
             }
             presetDropdownMenu.classList.add('hidden');
+            currentFocusIndex = -1;
         } else if (e.key === 'Escape') {
             presetDropdownMenu.classList.add('hidden');
             currentFocusIndex = -1;
