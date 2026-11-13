@@ -1,4 +1,4 @@
-const CACHE_NAME = 'yamaha-dg-v1';
+const CACHE_NAME = 'dg60fx-v1.0.0';
 
 // Liste aller Assets, die zwingend offline verfügbar sein müssen
 const ASSETS_TO_CACHE = [

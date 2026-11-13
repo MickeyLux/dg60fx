@@ -691,7 +691,7 @@ if (fxDelayLevel) fxDelayLevel.addEventListener('input', () => fxDelayLevelVal.t
 if (fxReverbLevel) fxReverbLevel.addEventListener('input', () => fxReverbLevelVal.textContent = parseFloat(fxReverbLevel.value).toFixed(1));
 
 // Preset & Sound Library Logic (Updated for Datalist & Sorted Object)
-const STORAGE_KEY = 'yamaha_dg_presets_v5';
+const STORAGE_KEY = 'dg_presets_v5';
 const presetSuggestions = document.getElementById('presetSuggestions');
 const presetNameInput = document.getElementById('presetNameInput');
 const presetDropdownMenu = document.getElementById('presetDropdownMenu');
@@ -768,7 +768,7 @@ function renderPresetDropdown(filter = '') {
     if (matchingKeys.length === 0) {
         const emptyDiv = document.createElement('div');
         emptyDiv.className = 'px-3 py-2 text-neutral-500 text-xs italic';
-        emptyDiv.textContent = 'Keine Presets gefunden';
+        emptyDiv.textContent = 'No Presets found';
         presetDropdownMenu.appendChild(emptyDiv);
         return;
     }
@@ -1015,7 +1015,7 @@ if (exportBtn) {
         const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(library, null, 2));
         const anchor = document.createElement('a');
         anchor.setAttribute("href", dataStr);
-        anchor.setAttribute("download", "yamaha_dg60fx_presets.json");
+        anchor.setAttribute("download", "dg60fx_presets.json");
         document.body.appendChild(anchor);
         anchor.click();
         anchor.remove();
