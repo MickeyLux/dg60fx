@@ -1,4 +1,4 @@
-const CACHE_NAME = 'dg60fx-v1.0.0';
+const CACHE_NAME = 'dg60fx-v1.0.1';
 
 // Liste aller Assets, die zwingend offline verfügbar sein müssen
 const ASSETS_TO_CACHE = [
@@ -6,7 +6,9 @@ const ASSETS_TO_CACHE = [
     './index.html',
     './app.js',
     './manifest.json',
-    './icon.svg'
+    './icon.svg',
+    './icon-192.png',
+    './icon-512.png'
 ];
 
 // 1. INSTALL-EVENT: Core-Assets in den Cache laden
