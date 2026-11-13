@@ -1,5 +1,37 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
-  <rect width="512" height="512" rx="112" fill="#0d0e10"/>
-  <path d="M256 96c-88.366 0-160 71.634-160 160s71.634 160 160 160 160-71.634 160-160-71.634-160-160-160zm0 272c-61.856 0-112-50.144-112-112s50.144-112 112-112 112 50.144 112 112-50.144 112-112 112z" fill="#d97706"/>
-  <path d="M256 192v64l48 48" stroke="#fff8e7" stroke-width="24" stroke-linecap="round" fill="none"/>
+  <defs>
+    <path id="path-0" d="M 157.538 189.703 C 168.687 172.256 176.584 163.659 189.703 154.913 C 206.731 146.12 229.907 139.713 244.841 137.846 C 261.682 134.128 271.745 134.564 281.6 134.564 C 291.665 134.564 299.104 134.564 306.544 134.564 C 316.78 134.564 321.975 140.364 328.205 142.441 C 345.056 153.237 355.85 167.355 368.903 178.544 C 374.923 183.387 382.687 189.852 382.687 191.015 C 387.831 191.672 391.251 206.82 393.19 210.051 C 400.015 229.674 403.189 242.17 406.318 254.687 C 406.318 279.053 408.303 293.709 399.097 314.421 C 385.766 334.039 376.645 342.781 366.277 353.149 C 336.109 362.168 314.408 365.443 290.79 367.59 C 259.869 367.59 240.217 366.277 220.554 366.277 C 205.058 363.223 192.59 363.388 180.513 360.369 C 164.399 353.297 162.901 358.679 156.226 341.99 C 149.008 313.448 140.068 289.301 134.564 264.533 C 130.287 240.498 124.718 226.171 124.718 209.395 C 124.718 199.749 128.352 192.633 133.908 187.077 C 138.844 182.141 143.872 180.395 147.692 176.574" style="fill: none;" />
+    <!-- Vertical gradient for the main red knob body -->
+    <linearGradient id="redKnobGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="rgb(187, 37, 45)" />
+      <stop offset="100%" stop-color="rgb(150, 29, 35)" />
+    </linearGradient>
+  </defs>
+  
+  <!-- Background Card (Unscaled) -->
+  <rect width="512" height="512" rx="112" fill="#0d0e10" />
+  
+  <!-- Main Knob Graphic Group (Centered & Scaled) -->
+  <g transform="translate(256, 256) scale(1.55) translate(-256, -256)">
+    <ellipse style="fill: url(#redKnobGradient); stroke: rgb(0, 0, 0); stroke-width: 4px; fill-opacity: 1;" cx="256" cy="256" rx="140" ry="140" />
+	  <ellipse cx="256" cy="256" rx="70" ry="70" style="fill: #303030; stroke: #202020; stroke-width: 4px;"/>
+	  <ellipse cx="256" cy="256" rx="45" ry="45" style="fill: #060606; stroke: #000000; stroke-width: 3px;"/>
+    <g style="">
+      <text style="white-space: pre; fill: rgb(255, 255, 255); font-family: Arial, sans-serif; font-size: 28px; font-weight: bold;" x="248.21" y="145.723">5</text>
+      <text style="white-space: pre; fill: rgb(255, 255, 255); font-family: Arial, sans-serif; font-size: 28px; font-weight: bold;" x="187.077" y="369.559">0</text>
+      <text style="white-space: pre; fill: rgb(255, 255, 255); font-family: Arial, sans-serif; font-size: 28px; font-weight: bold;" x="142.441" y="320.985">1</text>
+      <text style="white-space: pre; fill: rgb(255, 255, 255); font-family: Arial, sans-serif; font-size: 28px; font-weight: bold;" x="128" y="265.846">2</text>
+      <text style="white-space: pre; fill: rgb(255, 255, 255); font-family: Arial, sans-serif; font-size: 28px; font-weight: bold;" x="142.441" y="208.082">3</text>
+      <text style="white-space: pre; fill: rgb(255, 255, 255); font-family: Arial, sans-serif; font-size: 28px; font-weight: bold;" x="181.826" y="166.728">4</text>
+      <text style="white-space: pre; fill: rgb(255, 255, 255); font-family: Arial, sans-serif; font-size: 28px; font-weight: bold;" x="311.795" y="163.446">6</text>
+      <text style="white-space: pre; fill: rgb(255, 255, 255); font-family: Arial, sans-serif; font-size: 28px; font-weight: bold;" x="354.461" y="207.425">7</text>
+      <text style="white-space: pre; fill: rgb(255, 255, 255); font-family: Arial, sans-serif; font-size: 28px; font-weight: bold;" x="367.589" y="265.846">8</text>
+      <text style="white-space: pre; fill: rgb(255, 255, 255); font-family: Arial, sans-serif; font-size: 28px; font-weight: bold;" x="355.118" y="322.297">9</text>
+      <text style="white-space: pre; fill: rgb(255, 255, 255); font-family: Arial, sans-serif; font-size: 28px; font-weight: bold;" x="300.636" y="368.902">10</text>
+    </g>
+    <g style="filter: drop-shadow(#000 0px 0px 15px);" transform="rotate(60 256 256)">
+      <path d="M 249.387 189.974 Q 256 137.152 262.613 189.974 L 275.84 295.617 Q 282.453 348.438 269.227 348.438 L 242.773 348.438 Q 229.547 348.438 236.16 295.617 Z" style="stroke: #555555; fill: #080808; stroke-width: 4px; stroke-linejoin: bevel; stroke-linecap: round; paint-order: fill markers; transform-box: fill-box; transform-origin: 50% 50%;" />
+      <path style="fill: none; stroke: rgb(255, 255, 255); stroke-width: 5px;" d="M 256 167.01 L 256 204.425" />
+    </g>
+  </g>
 </svg>
