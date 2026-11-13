@@ -839,23 +839,23 @@ if (presetNameInput) {
     });
 }
 
-// Toggle-Button öffnet/schließt die komplette Liste
+// Toggle-Button öffnet/schließt die komplette Liste (ohne erzwungenes Focus auf Mobile)
 if (toggleDropdownBtn) {
     toggleDropdownBtn.addEventListener('click', (e) => {
         e.stopPropagation();
         if (presetDropdownMenu.classList.contains('hidden')) {
-            renderPresetDropdown(''); // Zeige alle Presets
+            // Zeigt IMMER die volle Liste ohne Filter beim Klick auf den Pfeil
+            renderPresetDropdown(''); 
             presetDropdownMenu.classList.remove('hidden');
-            // Setzt den Fokus direkt auf das Input-Feld, 
-            // damit die Tastatur-Navigation (Pfeiltasten/Enter) sofort funktioniert
-            presetNameInput.focus();
+            // WICHTIG: Kein presetNameInput.focus() hier, 
+            // damit auf dem Smartphone nicht unerwünscht die Tastatur aufpoppt!
         } else {
             presetDropdownMenu.classList.add('hidden');
         }
     });
 }
 
-// Live-Filter beim Tippen im Input
+// Live-Filter nur beim echten Tippen im Input
 if (presetNameInput) {
     presetNameInput.addEventListener('input', (e) => {
         const val = e.target.value;
@@ -863,9 +863,13 @@ if (presetNameInput) {
         presetDropdownMenu.classList.remove('hidden');
     });
 
-    presetNameInput.addEventListener('focus', () => {
-        renderPresetDropdown(presetNameInput.value);
-        presetDropdownMenu.classList.remove('hidden');
+    // Wenn man in das Feld klickt (ohne Pfeil), zeigen wir ebenfalls alle Presets 
+    // oder filtern nach dem aktuellen Inhalt, falls gewünscht
+    presetNameInput.addEventListener('click', (e) => {
+        if (presetDropdownMenu.classList.contains('hidden')) {
+            renderPresetDropdown(presetNameInput.value);
+            presetDropdownMenu.classList.remove('hidden');
+        }
     });
 }
 
