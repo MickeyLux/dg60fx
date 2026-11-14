@@ -752,13 +752,13 @@ function updateItemHighlight() {
     });
 }
 
-// Angepasste Render-Funktion mit 'dropdown-item'-Klasse und Reset des Index
-function renderPresetDropdown(filter = '') {
+// Angepasste Render-Funktion mit optionalem selectName zum Vorselektieren
+function renderPresetDropdown(filter = '', selectName = null) {
     const library = loadLibraryFromStorage();
     if (!presetDropdownMenu) return;
 
     presetDropdownMenu.innerHTML = '';
-    currentFocusIndex = -1; // Reset bei neuer Suche/Filterung
+    currentFocusIndex = -1; 
     const lowerFilter = filter.toLowerCase();
     
     const matchingKeys = Object.keys(library).filter(name => 
@@ -775,9 +775,13 @@ function renderPresetDropdown(filter = '') {
 
     matchingKeys.forEach((name, index) => {
         const item = document.createElement('div');
-        // Wichtig: 'dropdown-item'-Klasse für die Tastatur-Erkennung
         item.className = 'dropdown-item px-3 py-2 text-slate-200 hover:bg-neutral-800 hover:text-amber-300 cursor-pointer transition-colors border-b border-neutral-800/50 last:border-none';
         item.textContent = name;
+        
+        // Wenn der Name exakt dem im TextInput entspricht, direkt als aktiv markieren
+        if (selectName && name.toLowerCase() === selectName.toLowerCase()) {
+            currentFocusIndex = index;
+        }
         
         item.addEventListener('click', () => {
             presetNameInput.value = name;
@@ -788,94 +792,80 @@ function renderPresetDropdown(filter = '') {
         
         presetDropdownMenu.appendChild(item);
     });
+
+    // Direkt das Highlight auf das gefundene Element setzen
+    updateItemHighlight();
 }
 
-// Tastatur-Steuerung im Eingabefeld
+// Globale Tastatur-Steuerung, solange das Dropdown geöffnet ist
+document.addEventListener('keydown', (e) => {
+    if (!presetDropdownMenu || presetDropdownMenu.classList.contains('hidden')) return;
+
+    const items = presetDropdownMenu.querySelectorAll('.dropdown-item');
+
+    if (e.key === 'ArrowDown') {
+        e.preventDefault(); // Verhindert das Standard-Scrollen der Seite/Liste
+        if (items.length > 0) {
+            currentFocusIndex = (currentFocusIndex + 1) % items.length;
+            updateItemHighlight();
+        }
+    } else if (e.key === 'ArrowUp') {
+        e.preventDefault();
+        if (items.length > 0) {
+            currentFocusIndex = (currentFocusIndex - 1 + items.length) % items.length;
+            updateItemHighlight();
+        }
+    } else if (e.key === 'Enter') {
+        e.preventDefault();
+        if (currentFocusIndex >= 0 && items[currentFocusIndex]) {
+            items[currentFocusIndex].click();
+        } else {
+            loadSelectedPreset();
+        }
+        presetDropdownMenu.classList.add('hidden');
+        currentFocusIndex = -1;
+    } else if (e.key === 'Escape') {
+        e.preventDefault();
+        presetDropdownMenu.classList.add('hidden');
+        currentFocusIndex = -1;
+    }
+});
+
+// Input-spezifische Events (Tippen, Fokus, Öffnen via Pfeiltaste)
 if (presetNameInput) {
     presetNameInput.addEventListener('keydown', (e) => {
-        const items = presetDropdownMenu.querySelectorAll('.dropdown-item');
-        
-        // Wenn Dropdown zu ist und Pfeiltaste gedrückt wird -> öffnen und direkt erstes Element fokussieren
+        // Wenn Dropdown zu ist und Pfeiltaste gedrückt wird -> öffnen
         if (presetDropdownMenu.classList.contains('hidden')) {
             if (e.key === 'ArrowDown' || e.key === 'ArrowUp') {
                 e.preventDefault();
-                renderPresetDropdown(presetNameInput.value);
+                renderPresetDropdown('', presetNameInput.value);
                 presetDropdownMenu.classList.remove('hidden');
-                currentFocusIndex = items.length > 0 ? 0 : -1;
-                updateItemHighlight();
             }
-            return;
-        }
-
-        if (e.key === 'ArrowDown') {
-            e.preventDefault();
-            if (items.length > 0) {
-                currentFocusIndex = (currentFocusIndex + 1) % items.length;
-                updateItemHighlight();
-            }
-        } else if (e.key === 'ArrowUp') {
-            e.preventDefault();
-            if (items.length > 0) {
-                currentFocusIndex = (currentFocusIndex - 1 + items.length) % items.length;
-                updateItemHighlight();
-            }
-        } else if (e.key === 'Enter') {
-            e.preventDefault();
-            if (currentFocusIndex >= 0 && items[currentFocusIndex]) {
-                items[currentFocusIndex].click(); // Wählt das fokussierte Element aus
-            } else {
-                loadSelectedPreset(); // Fallback
-            }
-            presetDropdownMenu.classList.add('hidden');
-            currentFocusIndex = -1;
-        } else if (e.key === 'Escape') {
-            presetDropdownMenu.classList.add('hidden');
-            currentFocusIndex = -1;
         }
     });
 
+    // Live-Filter beim Tippen
     presetNameInput.addEventListener('input', (e) => {
         const val = e.target.value;
-        renderPresetDropdown(val);
+        renderPresetDropdown(val, val);
         presetDropdownMenu.classList.remove('hidden');
     });
 
     presetNameInput.addEventListener('focus', () => {
-        renderPresetDropdown(presetNameInput.value);
+        renderPresetDropdown(presetNameInput.value, presetNameInput.value);
         presetDropdownMenu.classList.remove('hidden');
     });
 }
 
-// Toggle-Button öffnet/schließt die komplette Liste (ohne erzwungenes Focus auf Mobile)
+// Toggle-Button öffnet die volle Liste und markiert das aktuelle Preset
 if (toggleDropdownBtn) {
     toggleDropdownBtn.addEventListener('click', (e) => {
         e.stopPropagation();
         if (presetDropdownMenu.classList.contains('hidden')) {
-            // Zeigt IMMER die volle Liste ohne Filter beim Klick auf den Pfeil
-            renderPresetDropdown(''); 
+            renderPresetDropdown('', presetNameInput.value); 
             presetDropdownMenu.classList.remove('hidden');
-            // WICHTIG: Kein presetNameInput.focus() hier, 
-            // damit auf dem Smartphone nicht unerwünscht die Tastatur aufpoppt!
         } else {
             presetDropdownMenu.classList.add('hidden');
-        }
-    });
-}
-
-// Live-Filter nur beim echten Tippen im Input
-if (presetNameInput) {
-    presetNameInput.addEventListener('input', (e) => {
-        const val = e.target.value;
-        renderPresetDropdown(val);
-        presetDropdownMenu.classList.remove('hidden');
-    });
-
-    // Wenn man in das Feld klickt (ohne Pfeil), zeigen wir ebenfalls alle Presets 
-    // oder filtern nach dem aktuellen Inhalt, falls gewünscht
-    presetNameInput.addEventListener('click', (e) => {
-        if (presetDropdownMenu.classList.contains('hidden')) {
-            renderPresetDropdown(presetNameInput.value);
-            presetDropdownMenu.classList.remove('hidden');
         }
     });
 }
@@ -887,12 +877,12 @@ document.addEventListener('click', (e) => {
     }
 });
 
-// Ersetze alte Aufrufe von refreshPresetSuggestions
+// Zentrale Funktion zum Aktualisieren der Vorschläge (keine Duplikate mehr)
 function refreshPresetSuggestions(selectedName = null) {
     if (selectedName && presetNameInput) {
         presetNameInput.value = selectedName;
     }
-    renderPresetDropdown('');
+    renderPresetDropdown('', presetNameInput ? presetNameInput.value : null);
 }
 
 function getCurrentSettings() {
