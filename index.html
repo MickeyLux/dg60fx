@@ -23,6 +23,9 @@
             -webkit-user-select: none;
             background-color: #0d0e10;
         }
+        header {
+			padding-top: env(titlebar-area-height, 0px);
+		}
         .font-brand {
             font-family: 'Chakra Petch', sans-serif;
         }
@@ -56,7 +59,7 @@
         }
     </style>
 </head>
-<body class="bg-tolex text-slate-100 min-h-screen flex flex-col justify-center items-center p-4">
+<body class="bg-tolex text-slate-100 min-h-screen flex flex-col items-center p-4">
 
     <!-- Amp Faceplate Container (Yamaha DG Style chassis) -->
     <div class="w-full max-w-6xl bg-neutral-950 border-4 border-neutral-800 rounded-xl shadow-[0_20px_50px_rgba(0,0,0,0.9)] overflow-hidden">
@@ -88,7 +91,7 @@
                         <div class="flex">
                             <input type="text" id="presetNameInput" placeholder="Preset Name (e.g. Crunch Solo Chorus)" autocomplete="off"
                                 class="w-full bg-neutral-950 text-amber-200 font-mono px-3 py-2 rounded-l border border-neutral-700 text-sm focus:outline-none focus:border-amber-600 placeholder-neutral-600">
-                            <button type="button" id="toggleDropdownBtn" title="Show all presets" class="bg-neutral-900 hover:bg-neutral-800 text-neutral-400 px-3 rounded-r border-t border-r border-b border-neutral-700 text-xs transition-colors flex items-center justify-center">
+                            <button type="button" id="toggleDropdownBtn" title="Show all presets" class="bg-neutral-900 hover:bg-neutral-800 text-neutral-400 px-3 py-2 rounded-r border-t border-r border-b border-neutral-700 text-xs transition-colors flex items-center justify-center">
                                 ▼
                             </button>
                         </div>
@@ -100,25 +103,45 @@
                     </div>
                     
                     <div class="flex gap-2 w-full sm:w-auto justify-end">
-                        <button title="Save" id="savePresetBtn" class="bg-amber-600 hover:bg-amber-500 text-slate-950 font-bold px-4 py-2 rounded text-sm transition-all shadow-md active:scale-95 whitespace-nowrap">
-                            &#x1F4BE;&#xFE0E;
+                        <button title="Save" id="savePresetBtn" class="bg-amber-600 hover:bg-amber-500 text-slate-950 font-bold px-3 py-2 rounded text-sm transition-all shadow-md active:scale-95 whitespace-nowrap flex items-center justify-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+								<path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"></path>
+								<polyline points="17 21 17 13 7 13 7 21"></polyline>
+								<polyline points="7 3 7 8 15 8"></polyline>
+							</svg>
                         </button>
-                        <button title="Load" id="loadPresetBtn" class="bg-neutral-800 hover:bg-neutral-700 text-amber-400 border border-amber-600/40 font-semibold px-4 py-2 rounded text-sm transition-all active:scale-95">
-                            &#x21BA;
+                        <button title="Load" id="loadPresetBtn" class="bg-neutral-800 hover:bg-neutral-700 text-amber-400 border border-amber-600/40 font-semibold px-3 py-2 rounded text-sm transition-all active:scale-95 flex items-center justify-center">
+							<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+							  <path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"></path>
+							  <path d="M3 3v5h5"></path>
+							</svg>
                         </button>
-                        <button title="Delete" id="deletePresetBtn" class="bg-red-950/60 hover:bg-red-900 text-red-400 border border-red-800/40 font-semibold px-4 py-2 rounded text-sm transition-all active:scale-95">
-                            &#x1F5D1;
+                        <button title="Delete" id="deletePresetBtn" class="bg-red-950/60 hover:bg-red-900 text-red-400 border border-red-800/40 font-semibold px-3 py-2 rounded text-sm transition-all active:scale-95 flex items-center justify-center">
+							<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+							  <polyline points="3 6 5 6 21 6"></polyline>
+							  <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
+							  <line x1="10" y1="11" x2="10" y2="17"></line>
+							  <line x1="14" y1="11" x2="14" y2="17"></line>
+							</svg>
                         </button>
                     </div>
                 </div>
 
                 <!-- Backup / Import Export -->
                 <div class="flex gap-2 w-full lg:w-auto justify-end border-t lg:border-t-0 border-neutral-800 pt-3 lg:pt-0">
-                    <button id="exportBtn" title="Export presets as JSON" class="bg-neutral-950 hover:bg-neutral-800 text-neutral-400 border border-neutral-700 px-3 py-2 rounded text-xs font-mono transition-all">
-                        &#x1F4E5;&#xFE0E;
+                    <button id="exportBtn" title="Export presets as JSON" class="bg-neutral-950 hover:bg-neutral-800 text-neutral-400 border border-neutral-700 px-3 py-2 rounded text-xs font-mono transition-all flex items-center justify-center">
+						<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+						  <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+						  <polyline points="7 10 12 15 17 10"></polyline>
+						  <line x1="12" y1="15" x2="12" y2="3"></line>
+						</svg>
                     </button>
-                    <label id="importLabel" title="Import presets from JSON" class="bg-neutral-950 hover:bg-neutral-800 text-neutral-400 border border-neutral-700 px-3 py-2 rounded text-xs font-mono transition-all cursor-pointer">
-                        &#x1F4E4;&#xFE0E;
+                    <label id="importLabel" title="Import presets from JSON" class="bg-neutral-950 hover:bg-neutral-800 text-neutral-400 border border-neutral-700 px-3 py-2 rounded text-xs font-mono transition-all cursor-pointer flex items-center justify-center">
+						<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+						  <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+						  <polyline points="17 8 12 3 7 8"></polyline>
+						  <line x1="12" y1="3" x2="12" y2="15"></line>
+						</svg>
                         <input type="file" id="importInput" accept=".json" class="hidden">
                     </label>
                 </div>
