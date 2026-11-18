@@ -1,9 +1,10 @@
-const CACHE_NAME = 'dg60fx-v1.0.1';
+const CACHE_NAME = 'dg60fx-v1.0.2';
 
 // Liste aller Assets, die zwingend offline verfügbar sein müssen
 const ASSETS_TO_CACHE = [
     './',
     './index.html',
+    './output.css',
     './app.js',
     './manifest.json',
     './icon.svg',
