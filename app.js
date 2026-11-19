@@ -690,8 +690,8 @@ if (fxDelayLevel) fxDelayLevel.addEventListener('input', () => fxDelayLevelVal.t
 
 if (fxReverbLevel) fxReverbLevel.addEventListener('input', () => fxReverbLevelVal.textContent = parseFloat(fxReverbLevel.value).toFixed(1));
 
-// Preset & Sound Library Logic (Updated for Datalist & Sorted Object)
 const STORAGE_KEY = 'dg_presets_v5';
+const AUTO_HIDE_MS = 3000;
 const presetSuggestions = document.getElementById('presetSuggestions');
 const presetNameInput = document.getElementById('presetNameInput');
 const presetDropdownMenu = document.getElementById('presetDropdownMenu');
@@ -702,18 +702,39 @@ const deletePresetBtn = document.getElementById('deletePresetBtn');
 const exportBtn = document.getElementById('exportBtn');
 const importInput = document.getElementById('importInput');
 const statusBanner = document.getElementById('statusBanner');
+const floatingAlert = document.getElementById('floatingAlert');
+const floatingAlertIcon = document.getElementById('floatingAlertIcon');
+const floatingAlertText = document.getElementById('floatingAlertText');
+const floatingAlertClose = document.getElementById('floatingAlertClose');
 
 let currentFocusIndex = -1;
+let alertHideTimer = null;
 
-function showStatus(message, type = 'success') {
-    if (!statusBanner) return;
-    statusBanner.textContent = message;
-    statusBanner.className = `mt-4 p-2.5 rounded-lg text-center text-xs font-mono transition-all ${
-        type === 'error' 
-            ? 'bg-red-950/90 text-red-300 border border-red-800' 
+function hideAlert() {
+    if (alertHideTimer) {
+        clearTimeout(alertHideTimer);
+        alertHideTimer = null;
+    }
+    floatingAlert.classList.remove('is-visible');
+}
+
+floatingAlertClose.addEventListener('click', hideAlert);
+
+function showStatus(message, type = 'success', duration = AUTO_HIDE_MS) {
+    if (alertHideTimer) clearTimeout(alertHideTimer);
+
+    const isError = type === 'error';
+    floatingAlertIcon.textContent = isError ? '!' : 'i';
+    floatingAlertText.textContent = message;
+    floatingAlert.className = `px-4 py-3 rounded-xl shadow-[0_12px_30px_rgba(0,0,0,0.85)] text-xs font-mono flex items-center gap-3 border is-visible ${
+        isError
+            ? 'bg-red-950/95 text-red-200 border-red-700/80'
             : 'bg-teal-950/90 text-teal-300 border border-teal-800'
     }`;
-    statusBanner.classList.remove('hidden');
+
+    if (duration > 0) {
+        alertHideTimer = setTimeout(hideAlert, duration);
+    }
 }
 
 function loadLibraryFromStorage() {

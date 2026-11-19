@@ -14,50 +14,6 @@
     <link rel="icon" type="image/svg+xml" href="icon.svg">
     <link rel="apple-touch-icon" href="icon.svg">
     <link rel="stylesheet" href="output.css">
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500;700&family=Inter:wght@400;600;800&display=swap');
-        
-        body {
-            font-family: 'Inter', system-ui, -apple-system, sans-serif;
-            user-select: none;
-            -webkit-user-select: none;
-            background-color: #0d0e10;
-        }
-        header {
-			padding-top: env(titlebar-area-height, 0px);
-		}
-        .font-brand {
-            font-family: 'Chakra Petch', sans-serif;
-        }
-        .knob-svg {
-            cursor: ns-resize;
-            touch-action: none;
-        }
-        .motorized-moving {
-            transition: transform 1.5s cubic-bezier(0.25, 1, 0.5, 1) !important;
-        }
-        .bg-tolex {
-            background-color: #141416;
-            background-image: radial-gradient(#24252a 15%, transparent 16%), radial-gradient(#0d0d0f 15%, transparent 16%);
-            background-size: 8px 8px;
-            background-position: 0 0, 4px 4px;
-        }
-        .pointerGroup {
-            filter: drop-shadow(#000 0px 0px 15px);
-        }
-        /* Custom scrollbar for effect menus */
-        ::-webkit-scrollbar {
-            width: 6px;
-            height: 6px;
-        }
-        ::-webkit-scrollbar-track {
-            background: #121214;
-        }
-        ::-webkit-scrollbar-thumb {
-            background: #3f3f46;
-            border-radius: 3px;
-        }
-    </style>
 </head>
 <body class="bg-tolex text-slate-100 min-h-screen flex flex-col items-center p-4">
 
@@ -410,8 +366,13 @@
             </div>
 
             <!-- Status Message Banner -->
-            <div id="statusBanner" class="hidden mt-4 p-2.5 rounded-lg text-center text-xs font-mono transition-all"></div>
-
+            <!--<div id="statusBanner" class="hidden mt-4 p-2.5 rounded-lg text-center text-xs font-mono transition-all"></div> -->
+            <div id="floatingAlert" role="alert" aria-live="polite" class="px-4 py-3 rounded shadow-[0_12px_30px_rgba(0,0,0,0.85)] text-xs font-mono flex items-center gap-3 border">
+                <span id="floatingAlertIcon" class="text-sm leading-none" aria-hidden="true"></span>
+                <span id="floatingAlertText" class="flex-1"></span>
+                <button type="button" id="floatingAlertClose" aria-label="Close" class="text-current opacity-60 hover:opacity-100 px1 leading-none">✕</button>
+            </div>
+            
             <!-- Instructions Footer -->
             <div class="mt-6 text-center text-xs text-neutral-500">
                 Move pots and amp select switch by click & drag, mouse wheel or selection. All Amp & FX settings are saved together per preset.

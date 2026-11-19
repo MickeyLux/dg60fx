@@ -1,1 +1,71 @@
 @import "tailwindcss";
+@import url('https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500;700&family=Inter:wght@400;600;800&display=swap');
+
+body {
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    user-select: none;
+    -webkit-user-select: none;
+    background-color: #0d0e10;
+}
+
+header {
+    padding-top: env(titlebar-area-height, 0px);
+}
+
+.font-brand {
+    font-family: 'Chakra Petch', sans-serif;
+}
+
+.knob-svg {
+    cursor: ns-resize;
+    touch-action: none;
+}
+
+.motorized-moving {
+    transition: transform 1.5s cubic-bezier(0.25, 1, 0.5, 1) !important;
+}
+
+.bg-tolex {
+    background-color: #141416;
+    background-image: radial-gradient(#24252a 15%, transparent 16%), radial-gradient(#0d0d0f 15%, transparent 16%);
+    background-size: 8px 8px;
+    background-position: 0 0, 4px 4px;
+}
+
+.pointerGroup {
+    filter: drop-shadow(#000 0px 0px 15px);
+}
+
+/* Custom scrollbar for effect menus */
+::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+}
+
+::-webkit-scrollbar-track {
+    background: #121214;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #3f3f46;
+    border-radius: 3px;
+}
+
+/* Floating alert box */
+#floatingAlert {
+    position: fixed;
+    right: 1.25rem;
+    top: 1.25rem;
+    z-index: 50;
+    max-width: min(26rem, calc(100vw - 2.5rem));
+    opacity: 0;
+    transform: translateY(12px);
+    pointer-events: none;
+    transition: opacity 0.25s ease, transform 0.25s ease;
+}
+
+#floatingAlert.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+}
