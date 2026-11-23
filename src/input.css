@@ -55,7 +55,7 @@ header {
 #floatingAlert {
     position: fixed;
     right: 1.25rem;
-    top: 1.25rem;
+    top: 1.5rem;
     z-index: 50;
     max-width: min(26rem, calc(100vw - 2.5rem));
     opacity: 0;

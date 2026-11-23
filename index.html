@@ -21,7 +21,7 @@
     <div class="w-full max-w-6xl bg-neutral-950 border-4 border-neutral-800 rounded-xl shadow-[0_20px_50px_rgba(0,0,0,0.9)] overflow-hidden">
         
         <!-- Top Bar / Gold Metal Trim Accent -->
-        <div class="bg-gradient-to-r from-amber-700 via-amber-500 to-amber-700 h-2 w-full"></div>
+        <div class="bg-linear-to-r from-amber-700 via-amber-500 to-amber-700 h-2 w-full"></div>
         
         <div class="p-6 md:p-10">
             <!-- Header / Brand -->
@@ -114,7 +114,7 @@
             </div>
 
             <!-- TAB 1: AMP SETTINGS -->
-            <div id="tabAmpContent" class="block bg-gradient-to-b from-[#8c1c24] via-[#75141b] to-[#590b11] p-6 rounded-xl rounded-tl-none border-2 border-red-700/60 shadow-[inset_0_2px_10px_rgba(0,0,0,0.6)]">
+            <div id="tabAmpContent" class="block bg-linear-to-b from-[#8c1c24] via-[#75141b] to-[#590b11] p-6 rounded-xl rounded-tl-none border-2 border-red-700/60 shadow-[inset_0_2px_10px_rgba(0,0,0,0.6)]">
                 <div class="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-7 gap-4 justify-items-center items-start">
                     
                     <!-- 8-Way Amp Select Rotary Switch -->
@@ -166,7 +166,7 @@
             </div>
 
             <!-- TAB 2: EFFECTS & CAB SIM -->
-            <div id="tabFxContent" class="hidden bg-gradient-to-b from-[#8c1c24] via-[#75141b] to-[#590b11] p-6 rounded-xl border-2 border-red-700/60 shadow-[inset_0_2px_10px_rgba(0,0,0,0.6)]">
+            <div id="tabFxContent" class="hidden bg-linear-to-b from-[#8c1c24] via-[#75141b] to-[#590b11] p-6 rounded-xl border-2 border-red-700/60 shadow-[inset_0_2px_10px_rgba(0,0,0,0.6)]">
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                     
                     <!-- 1. COMPRESSOR (On/Off + 1 Parameter "Comp") -->
@@ -177,7 +177,7 @@
                                     <h4 class="font-brand font-bold text-amber-200 text-sm tracking-wider">COMPRESSOR</h4>
                                     <label class="relative inline-flex items-center cursor-pointer">
                                         <input type="checkbox" id="fxCompEnable" class="sr-only peer">
-                                        <div class="w-8 h-4 bg-neutral-800 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-3 after:w-3 after:transition-all peer-checked:bg-amber-600"></div>
+                                        <div class="w-8 h-4 bg-neutral-800 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-0.5 after:bg-white after:border-gray-300 after:border after:rounded-full after:h-3 after:w-3 after:transition-all peer-checked:bg-amber-600"></div>
                                     </label>
                                 </div>
                             </div>
@@ -201,7 +201,7 @@
                                     <h4 class="font-brand font-bold text-amber-200 text-sm tracking-wider">MODULATION</h4>
                                     <label class="relative inline-flex items-center cursor-pointer">
                                         <input type="checkbox" id="fxModEnable" class="sr-only peer">
-                                        <div class="w-8 h-4 bg-neutral-800 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-3 after:w-3 after:transition-all peer-checked:bg-amber-600"></div>
+                                        <div class="w-8 h-4 bg-neutral-800 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-0.5 after:bg-white after:border-gray-300 after:border after:rounded-full after:h-3 after:w-3 after:transition-all peer-checked:bg-amber-600"></div>
                                     </label>
                                 </div>
                                 <select id="fxModType" class="bg-neutral-900 text-amber-200 font-mono text-xs py-1 px-2 rounded border border-neutral-700">
@@ -257,7 +257,7 @@
                                     <h4 class="font-brand font-bold text-amber-200 text-sm tracking-wider">DELAY</h4>
                                     <label class="relative inline-flex items-center cursor-pointer">
                                         <input type="checkbox" id="fxDelayEnable" class="sr-only peer">
-                                        <div class="w-8 h-4 bg-neutral-800 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-3 after:w-3 after:transition-all peer-checked:bg-amber-600"></div>
+                                        <div class="w-8 h-4 bg-neutral-800 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-0.5 after:bg-white after:border-gray-300 after:border after:rounded-full after:h-3 after:w-3 after:transition-all peer-checked:bg-amber-600"></div>
                                     </label>
                                 </div>
                                 <select id="fxDelayType" class="bg-neutral-900 text-amber-200 font-mono text-xs py-1 px-2 rounded border border-neutral-700">
@@ -299,7 +299,7 @@
                                     <h4 class="font-brand font-bold text-amber-200 text-sm tracking-wider">REVERB</h4>
                                     <label class="relative inline-flex items-center cursor-pointer">
                                         <input type="checkbox" id="fxReverbEnable" class="sr-only peer">
-                                        <div class="w-8 h-4 bg-neutral-800 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-3 after:w-3 after:transition-all peer-checked:bg-amber-600"></div>
+                                        <div class="w-8 h-4 bg-neutral-800 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-0.5 after:bg-white after:border-gray-300 after:border after:rounded-full after:h-3 after:w-3 after:transition-all peer-checked:bg-amber-600"></div>
                                     </label>
                                 </div>
                                 <select id="fxReverbType" class="bg-neutral-900 text-amber-200 font-mono text-xs py-1 px-2 rounded border border-neutral-700">
@@ -328,7 +328,7 @@
                                     <h4 class="font-brand font-bold text-amber-200 text-sm tracking-wider">SP.SIM</h4>
                                     <label class="relative inline-flex items-center cursor-pointer">
                                         <input type="checkbox" id="spSimEnable" class="sr-only peer">
-                                        <div class="w-8 h-4 bg-neutral-800 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-3 after:w-3 after:transition-all peer-checked:bg-amber-600"></div>
+                                        <div class="w-8 h-4 bg-neutral-800 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-0.5 after:bg-white after:border-gray-300 after:border after:rounded-full after:h-3 after:w-3 after:transition-all peer-checked:bg-amber-600"></div>
                                     </label>
                                 </div>
                                 <span class="text-xs text-neutral-400 font-mono">CAB TYPE</span>
@@ -379,6 +379,17 @@
             </div>
         </div>
     </div>
-<script src="app.js" defer></script>
+    <!-- Eigenes Bestätigungs-Modal -->
+    <div id="confirmModal" class="hidden fixed inset-0 z-50 bg-black/75 flex items-center justify-center p-4">
+        <div id="confirmModalCard" class="w-full max-w-md bg-neutral-900 border border-neutral-700 rounded-xl shadow-[0_20px_50px_rgba(0,0,0,0.9)] overflow-hidden">
+            <div class="h-1.5 w-full bg-gradient-to-r from-amber-700 via-amber-500 to-amber-700"></div>
+            <div class="p-5">
+                <h3 id="confirmModalTitle" class="font-brand text-base font-bold tracking-wider text-amber-200 uppercase mb-2"></h3>
+                <p id="confirmModalMessage" class="text-xs font-mono text-neutral-300 leading-relaxed whitespace-pre-line mb-5"></p>
+                <div id="confirmModalActions" class="flex flex-wrap justify-end gap-2"></div>
+            </div>
+        </div>
+    </div>
+    <script src="app.js" defer></script>
 </body>
 </html>
