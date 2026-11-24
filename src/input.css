@@ -36,6 +36,10 @@ header {
     filter: drop-shadow(#000 0px 0px 15px);
 }
 
+.knobShadow {
+    filter: drop-shadow(#000 0px 0px 5px);
+}
+
 /* Custom scrollbar for effect menus */
 ::-webkit-scrollbar {
     width: 6px;

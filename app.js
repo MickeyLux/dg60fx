@@ -671,35 +671,34 @@ function initAmpModeSwitch() {
 function createKnobHTML(knob) {
     return `
     <div class="flex flex-col items-center" id="card-${knob.id}">
-        <h3 class="text-xs font-black uppercase tracking-widest text-amber-100 mb-1 font-brand">${knob.label}</h3>
+        <h3 class="text-xs font-black uppercase tracking-widest text-amber-100 -mb-2 lg:mb-1 font-brand">${knob.label}</h3>
         
         <svg class="knob-svg w-32 h-32 select-none" viewBox="110 110 292 292" data-id="${knob.id}">
-            <ellipse cx="256" cy="256" rx="70" ry="70" style="fill: #303030; stroke: #202020; stroke-width: 4px;"/>
+            <ellipse class="knobShadow" cx="256" cy="256" rx="70" ry="70" style="fill: #303030; stroke: #202020; stroke-width: 4px;"/>
             <ellipse cx="256" cy="256" rx="45" ry="45" style="fill: #060606; stroke: #000000; stroke-width: 3px;"/>
             
-            <g transform="matrix(0.946044, 0, 0, 0.946044, 14.208778, 17.450031)" fill="#fff8e7">
-                <text style="white-space: pre; font-family: Arial, sans-serif; font-size: 28px; font-weight: bold;" x="187.077" y="368.902">0</text>
-                <text style="white-space: pre; font-family: Arial, sans-serif; font-size: 28px; font-weight: bold;" x="142.441" y="320.985">1</text>
-                <text style="white-space: pre; font-family: Arial, sans-serif; font-size: 28px; font-weight: bold;" x="128.000" y="263.746">2</text>
-                <text style="white-space: pre; font-family: Arial, sans-serif; font-size: 28px; font-weight: bold;" x="142.441" y="208.082">3</text>
-                <text style="white-space: pre; font-family: Arial, sans-serif; font-size: 28px; font-weight: bold;" x="181.826" y="163.446">4</text>
-                <text style="white-space: pre; font-family: Arial, sans-serif; font-size: 28px; font-weight: bold;" x="248.210" y="145.723">5</text>
-                <text style="white-space: pre; font-family: Arial, sans-serif; font-size: 28px; font-weight: bold;" x="311.795" y="163.446">6</text>
-                <text style="white-space: pre; font-family: Arial, sans-serif; font-size: 28px; font-weight: bold;" x="354.461" y="207.425">7</text>
-                <text style="white-space: pre; font-family: Arial, sans-serif; font-size: 28px; font-weight: bold;" x="367.589" y="263.746">8</text>
-                <text style="white-space: pre; font-family: Arial, sans-serif; font-size: 28px; font-weight: bold;" x="355.118" y="322.297">9</text>
-                <text style="white-space: pre; font-family: Arial, sans-serif; font-size: 28px; font-weight: bold;" x="300.636" y="368.902">10</text>
+            <g class="fill-amber-100 stroke-[3.5] stroke-amber-100" stroke-linecap="round">
+                <text class="stroke-none" style="white-space: pre; font-family: Arial, sans-serif; font-size: 26.49px; font-weight: bold;" text-anchor="middle" dominant-baseline="central" x="204.00" y="346.07">0</text>
+                <line x1="169.40" y1="306.00" x2="160.74" y2="311.00"/>
+                <line x1="156.00" y1="256.00" x2="146.00" y2="256.00"/>
+                <line x1="169.40" y1="206.00" x2="160.74" y2="201.00"/>
+                <line x1="206.00" y1="169.40" x2="201.00" y2="160.74"/>
+                <line class="stroke-7" x1="256.00" y1="156.00" x2="256.00" y2="146.00"/>
+                <line x1="306.00" y1="169.40" x2="311.00" y2="160.74"/>
+                <line x1="342.60" y1="206.00" x2="351.26" y2="201.00"/>
+                <line x1="356.00" y1="256.00" x2="366.00" y2="256.00"/>
+                <line x1="342.60" y1="306.00" x2="351.26" y2="311.00"/>
+                <text class="stroke-none" style="white-space: pre; font-family: Arial, sans-serif; font-size: 26.49px; font-weight: bold;" text-anchor="middle" dominant-baseline="central" x="308.00" y="346.07">10</text>
             </g>
-            
+
             <g class="pointerGroup" style="transform: rotate(210deg); transform-origin: 256px 256px;">
                 <path d="M 249.387 189.974 Q 256 137.152 262.613 189.974 L 275.84 295.617 Q 282.453 348.438 269.227 348.438 L 242.773 348.438 Q 229.547 348.438 236.16 295.617 Z" style="stroke: #555555; fill: #080808; stroke-width: 3px; stroke-linejoin: bevel; stroke-linecap: round;"/>
                 <path style="fill: none; stroke: #fff8e7; stroke-width: 6px; stroke-linecap: round;" d="M 256 162.01 L 256 204.425"/>
             </g>
         </svg>
 
-        <div class="mt-2 flex flex-col items-center">
-            <input type="number" class="valueInput w-20 text-center bg-black text-amber-200 font-mono text-sm py-1 px-2 rounded border border-red-800 focus:outline-none focus:border-amber-500" 
-                    value="${knob.initial.toFixed(1)}" min="0" max="10" step="0.1">
+        <div class="-mt-2 lg:mt-2 flex flex-col items-center">
+            <input type="number" class="valueInput w-20 text-center bg-black text-amber-200 font-mono text-sm py-1 px-2 rounded border border-red-800 focus:outline-none focus:border-amber-500" value="${knob.initial.toFixed(1)}" min="0" max="10" step="0.1">
         </div>
     </div>
     `;
